@@ -24,11 +24,6 @@ def are_valid_groups(n,g):
             
         if curr == False:
             return False
+
     return True
 
-
-
-
-n = [1,2,3,4,5,6]
-g = [[1,2],[3,4],[5,6,7]]
-print(are_valid_groups(n,g))
