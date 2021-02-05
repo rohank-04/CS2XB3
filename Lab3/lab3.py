@@ -46,13 +46,10 @@ def quicksort_inplace(L):
     sorted = False
 
     while sorted == False:
-
         pivot = L[pivotCounter]
         i = -1
         for j in range(len(L)):
-            if L[j] >= pivot:
-                x = 0
-            else:
+            if L[j] < pivot:
                 i += 1
                 L[i],L[j] = L[j],L[i]
 
@@ -153,7 +150,3 @@ def quad_pivot_quicksort(L):
 
 
     return quad_pivot_quicksort(firstArr) + [firstPivot] + quad_pivot_quicksort(secondArr) + [secondPivot] + quad_pivot_quicksort(thirdArr) + [thirdPivot] + quad_pivot_quicksort(fourthArr) + [fourthPivot] + quad_pivot_quicksort(fifthArr)
-
-
-
-
