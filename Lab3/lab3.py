@@ -70,9 +70,11 @@ L = create_random_list(10)
              
 def dual_pivot_quicksort(L):
 
+    if len(L) < 2:
+        return L
+
     if L[len(L)-1] < L[0]:
         L[0],L[len(L)-1] = L[len(L)-1],L[0]
-
 
     if len(L) < 3:
         return L
@@ -90,46 +92,68 @@ def dual_pivot_quicksort(L):
         else:
             middleArr += [L[i]]
         
+
+    return dual_pivot_quicksort(firstArr) + [firstPivot] + dual_pivot_quicksort(middleArr) + [secondPivot] + dual_pivot_quicksort(lastArr)
+
+
+
     
-    middleArr = [firstPivot] + middleArr
-    lastArr = [secondPivot] + lastArr
-    
-    if len(firstArr) > 2:
-        firstArr = dual_pivot_quicksort(firstArr)
-    if len(middleArr) > 2:
-        middleArr = [firstPivot] + dual_pivot_quicksort(middleArr[1:])
-    if len(lastArr) > 2:
-        lastArr = [secondPivot] + dual_pivot_quicksort(lastArr[1:])
 
-    # print("First Pivor",firstPivot)
-    # print("Second Pivot",secondPivot)
-    # print("First Arr",firstArr)
-    # print("Middle Arr",middleArr)
-    # print("Last Arr",lastArr)
-    finalArr = firstArr + middleArr + lastArr
+def tri_pivot_quicksort(L):
 
-    return finalArr
+    if len(L) <= 2:
+        return sorted(L)
+
+    pivots = sorted(L[:3])
+
+    firstPivot,secondPivot,thirdPivot = pivots[0],pivots[1],pivots[2]
+
+    L = L[3:]
+
+    firstArr,secondArr,thirdArr,fourthArr = [],[],[],[]
+
+    for item in L:
+        if item < firstPivot:
+            firstArr += [item]
+        elif firstPivot <= item < secondPivot:
+            secondArr += [item]
+        elif secondPivot <= item < thirdPivot:
+            thirdArr += [item]
+        else:
+            fourthArr += [item]
 
 
-print("<__________________________________>")
-for i in range(0,50):
-    time.sleep(1)
+    return tri_pivot_quicksort(firstArr) + [firstPivot] + tri_pivot_quicksort(secondArr) + [secondPivot] + tri_pivot_quicksort(thirdArr) + [thirdPivot] + tri_pivot_quicksort(fourthArr)
 
-    L = create_random_list(10)
-    initialL = L
-    Lsorted = dual_pivot_quicksort(L)
-    L.sort()
-    if L == Lsorted:
-        print(True)
-    else:
-        print("FALSE!!!!")
-        print(initialL)
-        print(L)
-        time.sleep(1)
-        print(dual_pivot_quicksort(initialL))
-        print(Lsorted)
-    
-print(dual_pivot_quicksort([2, 2, 2, 3, 4, 5, 6, 6, 9, 10]))
-L = [1, 2, 4, 6, 7, 7, 8, 10, 10, 10]
-L.sort()
-print(L == dual_pivot_quicksort(L))
+
+def quad_pivot_quicksort(L):
+
+    if len(L) <= 3:
+        return sorted(L)
+
+    pivots = sorted(L[:4])
+
+    firstPivot,secondPivot,thirdPivot,fourthPivot = pivots[0],pivots[1],pivots[2],pivots[3]
+
+    L = L[4:]
+
+    firstArr,secondArr,thirdArr,fourthArr,fifthArr = [],[],[],[],[]
+
+    for item in L:
+        if item < firstPivot:
+            firstArr += [item]
+        elif firstPivot <= item < secondPivot:
+            secondArr += [item]
+        elif secondPivot <= item < thirdPivot:
+            thirdArr += [item]
+        elif thirdPivot <= item < fourthPivot:
+            fourthArr += [item]
+        else:
+            fifthArr += [item]
+
+
+    return quad_pivot_quicksort(firstArr) + [firstPivot] + quad_pivot_quicksort(secondArr) + [secondPivot] + quad_pivot_quicksort(thirdArr) + [thirdPivot] + quad_pivot_quicksort(fourthArr) + [fourthPivot] + quad_pivot_quicksort(fifthArr)
+
+
+
+
