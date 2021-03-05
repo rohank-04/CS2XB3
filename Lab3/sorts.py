@@ -247,3 +247,19 @@ def multiPivotExperimentNearSortedLists():
     plt.title("Experiment 1")
     plt.show()
 
+
+def worst_case_performance():
+    times1 = []
+    x = []
+
+    for i in range(1000):
+        times1 += [nearSortListsOfSize(i,my_quicksort)]
+        x += [i]
+
+    plt.plot(x,times1)
+    plt.xlabel("Length of List Sorted")
+    plt.ylabel("Worst Case Performance")
+    plt.title("Worst Case Experiment")
+    plt.show()
+
+worst_case_performance()

@@ -1,6 +1,9 @@
+import timeit
 import random
 import math
 import time
+import matplotlib.pyplot as plt
+import numpy as np
 
 def my_quicksort(L):
     copy = quicksort_copy(L)
@@ -130,6 +133,7 @@ def quad_pivot_quicksort(L):
 
     pivots = sorted(L[:4])
 
+
     firstPivot,secondPivot,thirdPivot,fourthPivot = pivots[0],pivots[1],pivots[2],pivots[3]
 
     L = L[4:]
@@ -150,3 +154,49 @@ def quad_pivot_quicksort(L):
 
 
     return quad_pivot_quicksort(firstArr) + [firstPivot] + quad_pivot_quicksort(secondArr) + [secondPivot] + quad_pivot_quicksort(thirdArr) + [thirdPivot] + quad_pivot_quicksort(fourthArr) + [fourthPivot] + quad_pivot_quicksort(fifthArr)
+
+
+
+def experiment():
+
+    times1 = []
+    times2 = []
+    
+    for i in range(100):
+        start = timeit.default_timer()
+        L = create_random_list(i)
+        my_quicksort(L)
+        end = timeit.default_timer()
+        myQuickSortTime = end - start
+        times1.append(myQuickSortTime)
+    
+   
+    
+
+    
+    for i in range(100):
+        start2 = timeit.default_timer()
+        L = create_random_list(i)
+        quicksort_inplace(L)
+        end2 = timeit.default_timer()
+        inplaceQuickSortTime = end2 - start2
+        times2.append(inplaceQuickSortTime)
+
+    x = range(100)
+    
+
+    plt.plot(x,times1, label="Regular QuickSort",color="red")
+    plt.plot(x,times2, label="Inplace QuickSort",color="blue")
+    plt.xlabel("Length of List")
+    plt.ylabel("Time")
+    plt.title("Run Times of QuickSort vs Inplace QuickSort")
+    plt.show()
+
+        
+    
+   
+
+    
+
+
+experiment()
