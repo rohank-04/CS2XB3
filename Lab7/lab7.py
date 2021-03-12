@@ -1,6 +1,8 @@
 from collections import deque
 
-#Undirected graph using an adjacency list
+# Undirected graph using an adjacency list
+
+
 class Graph:
 
     def __init__(self, n):
@@ -26,10 +28,10 @@ class Graph:
         return len()
 
 
-#Breadth First Search
+# Breadth First Search
 def BFS(G, node1, node2):
     Q = deque([node1])
-    marked = {node1 : True}
+    marked = {node1: True}
     for node in G.adj:
         if node != node1:
             marked[node] = False
@@ -44,7 +46,7 @@ def BFS(G, node1, node2):
     return False
 
 
-#Depth First Search
+# Depth First Search
 def DFS(G, node1, node2):
     S = [node1]
     marked = {}
